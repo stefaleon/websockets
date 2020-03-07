@@ -9,7 +9,8 @@
     Client
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      io();
+      const socket = io();
+      socket.on('myEvent', () => console.log('my event was emitted'));
     </script>
   </body>
 </html>
