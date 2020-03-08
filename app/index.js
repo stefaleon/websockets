@@ -11,18 +11,10 @@ const io = socketio(server);
 
 app.use(express.static(path.join(__dirname, '../public')));
 
-let count = 0;
-
 io.on('connection', socket => {
   console.log('new websocket connection');
-
-  socket.emit('countUpdated', count);
-
-  socket.on('countIncremented', () => {
-    count++;
-    // socket.emit('countUpdated', count);
-    io.emit('countUpdated', count);
-  });
+  const message = 'Welcome to the chat app';
+  socket.emit('welcomeSent', message);
 });
 
 server.listen(HTTP_PORT, () => console.log(`Listening on port: ${HTTP_PORT}`));
