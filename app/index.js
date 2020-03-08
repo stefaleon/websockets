@@ -14,7 +14,11 @@ app.use(express.static(path.join(__dirname, '../public')));
 io.on('connection', socket => {
   console.log('new websocket connection');
   const message = 'Welcome to the chat app';
-  socket.emit('welcomeSent', message);
+  socket.emit('serverSentMessage', message);
+
+  socket.on('clientSentMessage', msg => {
+    io.emit('serverSentMessage', msg);
+  });
 });
 
 server.listen(HTTP_PORT, () => console.log(`Listening on port: ${HTTP_PORT}`));

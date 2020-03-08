@@ -1,6 +1,6 @@
 const socket = io();
 
-socket.on('welcomeSent', msg => {
+socket.on('serverSentMessage', msg => {
   console.log(msg);
   document.querySelector('#message').innerHTML = msg;
 });
