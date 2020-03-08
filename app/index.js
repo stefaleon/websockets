@@ -17,8 +17,9 @@ io.on('connection', socket => {
   socket.emit('serverSentMessage', message);
   socket.broadcast.emit('serverSentMessage', 'A new user has joined');
 
-  socket.on('clientSentMessage', msg => {
+  socket.on('clientSentMessage', (msg, ackCallback) => {
     io.emit('serverSentMessage', msg);
+    ackCallback();
   });
 
   socket.on('disconnect', () => {
