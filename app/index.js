@@ -11,9 +11,11 @@ const io = socketio(server);
 
 app.use(express.static(path.join(__dirname, '../public')));
 
+let count = 0;
+
 io.on('connection', socket => {
   console.log('new websocket connection');
-  socket.emit('myEvent');
+  socket.emit('countUpdated', count);
 });
 
 server.listen(HTTP_PORT, () => console.log(`Listening on port: ${HTTP_PORT}`));
