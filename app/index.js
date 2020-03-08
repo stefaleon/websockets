@@ -20,6 +20,10 @@ io.on('connection', socket => {
   socket.on('clientSentMessage', msg => {
     io.emit('serverSentMessage', msg);
   });
+
+  socket.on('disconnect', () => {
+    io.emit('serverSentMessage', 'A user has disconnected');
+  });
 });
 
 server.listen(HTTP_PORT, () => console.log(`Listening on port: ${HTTP_PORT}`));
