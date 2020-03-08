@@ -15,6 +15,7 @@ io.on('connection', socket => {
   console.log('new websocket connection');
   const message = 'Welcome to the chat app';
   socket.emit('serverSentMessage', message);
+  socket.broadcast.emit('serverSentMessage', 'A new user has joined');
 
   socket.on('clientSentMessage', msg => {
     io.emit('serverSentMessage', msg);
