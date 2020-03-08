@@ -26,11 +26,12 @@ io.on('connection', socket => {
     io.emit('serverSentMessage', 'A user has disconnected');
   });
 
-  socket.on('locationSent', obj => {
+  socket.on('locationSent', (obj, callback) => {
     io.emit(
       'serverSentMessage',
       `https://google.com/maps?q=${obj.lat},${obj.long}`
     );
+    callback();
   });
 });
 
