@@ -15,7 +15,13 @@ let count = 0;
 
 io.on('connection', socket => {
   console.log('new websocket connection');
+
   socket.emit('countUpdated', count);
+
+  socket.on('countIncremented', () => {
+    count++;
+    socket.emit('countUpdated', count);
+  });
 });
 
 server.listen(HTTP_PORT, () => console.log(`Listening on port: ${HTTP_PORT}`));
