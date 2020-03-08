@@ -20,7 +20,8 @@ io.on('connection', socket => {
 
   socket.on('countIncremented', () => {
     count++;
-    socket.emit('countUpdated', count);
+    // socket.emit('countUpdated', count);
+    io.emit('countUpdated', count);
   });
 });
 
