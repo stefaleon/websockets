@@ -1,0 +1,13 @@
+div {
+  margin: 5px;
+}
+
+button {
+  cursor: pointer;
+}
+
+#message {
+  background-color: lightgrey;
+  max-width: 200px;
+  padding: 5px;
+}

@@ -24,6 +24,13 @@ io.on('connection', socket => {
   socket.on('disconnect', () => {
     io.emit('serverSentMessage', 'A user has disconnected');
   });
+
+  socket.on('locationSent', obj => {
+    io.emit(
+      'serverSentMessage',
+      `https://google.com/maps?q=${obj.lat},${obj.long}`
+    );
+  });
 });
 
 server.listen(HTTP_PORT, () => console.log(`Listening on port: ${HTTP_PORT}`));

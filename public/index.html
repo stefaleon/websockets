@@ -3,15 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
     <title>Chat App</title>
   </head>
   <body>
     Client
     <div id="message"></div>
-    <form id="message-form">
-      <input placeholder="type your message" />
-      <button>Send</button>
-    </form>
+    <div>
+      <form id="message-form">
+        <input placeholder="type your message" />
+        <button>Send</button>
+      </form>
+    </div>
+    <div>
+      <button id="send-location">Send Location</button>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/chat.js"></script>
   </body>
