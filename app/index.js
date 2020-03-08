@@ -19,7 +19,7 @@ io.on('connection', socket => {
 
   socket.on('clientSentMessage', (msg, ackCallback) => {
     io.emit('serverSentMessage', msg);
-    ackCallback();
+    ackCallback('Server says: Got it');
   });
 
   socket.on('disconnect', () => {

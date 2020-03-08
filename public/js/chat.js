@@ -10,8 +10,8 @@ document.querySelector('#message-form').addEventListener('submit', e => {
 
   const clientMessage = document.querySelector('input').value;
 
-  socket.emit('clientSentMessage', clientMessage, () => {
-    console.log('ack: message sent from client');
+  socket.emit('clientSentMessage', clientMessage, serverAckMessage => {
+    console.log('ack: message sent from client', serverAckMessage);
   });
 });
 
