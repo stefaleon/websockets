@@ -20,6 +20,11 @@ messageForm.addEventListener('submit', e => {
   socket.emit('clientSentMessage', clientMessage, errorMessage => {
     // reenable the form on emit
     messageFormButton.removeAttribute('disabled');
+
+    // clear and focus input
+    messageFormInput.value = '';
+    messageFormInput.focus();
+
     if (errorMessage) {
       return console.log(errorMessage);
     }
