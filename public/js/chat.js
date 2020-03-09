@@ -8,10 +8,19 @@ const messagesDiv = document.querySelector('#messages');
 const userConnectionMessagesDiv = document.querySelector('#user-connections');
 
 const messageTemplate = document.querySelector('#message-template').innerHTML;
+const locationMessageTemplate = document.querySelector(
+  '#location-message-template'
+).innerHTML;
 
 socket.on('serverSentMessage', msg => {
   console.log(msg);
   const mustacheHtml = Mustache.render(messageTemplate, { message: msg });
+  messagesDiv.insertAdjacentHTML('afterbegin', mustacheHtml);
+});
+
+socket.on('serverSentLocationMessage', url => {
+  console.log(url);
+  const mustacheHtml = Mustache.render(locationMessageTemplate, { url });
   messagesDiv.insertAdjacentHTML('afterbegin', mustacheHtml);
 });
 
