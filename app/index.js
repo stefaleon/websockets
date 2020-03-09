@@ -18,8 +18,14 @@ io.on('connection', socket => {
   socket.broadcast.emit('serverSentMessage', 'A new user has joined');
 
   socket.on('clientSentMessage', (msg, ackCallback) => {
+    if (msg.trim().length < 1) {
+      return ackCallback('Cannot emit empty messages');
+    }
+    if (msg.trim() === 'kkk') {
+      return ackCallback('Cannot say "kkk"');
+    }
     io.emit('serverSentMessage', msg);
-    ackCallback('Server says: Got it');
+    ackCallback();
   });
 
   socket.on('disconnect', () => {
