@@ -7,7 +7,6 @@
     <title>Chat App</title>
   </head>
   <body>
-    <div id="messages"></div>
     <div>
       <form id="message-form">
         <input placeholder="type your message" />
@@ -16,7 +15,9 @@
     </div>
     <div>
       <button id="send-location">Send Location</button>
+      <div id="user-connections"></div>
     </div>
+    <div id="messages"></div>
     <script id="message-template" type="text/html">
       <div id="mustache-message">
         {{message}}

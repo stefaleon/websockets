@@ -13,9 +13,9 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 io.on('connection', socket => {
   console.log('new websocket connection');
-  const message = 'Welcome to the chat app';
-  socket.emit('serverSentMessage', message);
-  socket.broadcast.emit('serverSentMessage', 'A new user has joined');
+
+  socket.emit('serverSentMessage', 'Welcome to the chat app');
+  socket.broadcast.emit('userConnection', 'A new user has joined');
 
   socket.on('clientSentMessage', (msg, ackCallback) => {
     if (msg.trim().length < 1) {
@@ -29,7 +29,7 @@ io.on('connection', socket => {
   });
 
   socket.on('disconnect', () => {
-    io.emit('serverSentMessage', 'A user has disconnected');
+    io.emit('userConnection', 'A user has disconnected');
   });
 
   socket.on('locationSent', (obj, callback) => {

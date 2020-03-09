@@ -22,3 +22,8 @@ button {
   padding: 13px;
   border: solid 1px white;
 }
+
+#user-connections {
+  display: inline;
+  color: orange;
+}
