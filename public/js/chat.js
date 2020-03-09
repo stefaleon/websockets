@@ -4,10 +4,14 @@ const messageForm = document.querySelector('#message-form');
 const messageFormInput = messageForm.querySelector('input');
 const messageFormButton = messageForm.querySelector('button');
 const sendLocationButton = document.querySelector('#send-location');
+const messagesDiv = document.querySelector('#messages');
+
+const messageTemplate = document.querySelector('#message-template').innerHTML;
 
 socket.on('serverSentMessage', msg => {
   console.log(msg);
-  document.querySelector('#message').innerHTML = msg;
+  const mustacheHtml = Mustache.render(messageTemplate, { message: msg });
+  messagesDiv.insertAdjacentHTML('afterbegin', mustacheHtml);
 });
 
 messageForm.addEventListener('submit', e => {

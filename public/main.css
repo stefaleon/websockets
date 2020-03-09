@@ -2,12 +2,23 @@ div {
   margin: 5px;
 }
 
+button,
+input {
+  border-radius: 5px;
+  padding: 7px;
+}
+
 button {
   cursor: pointer;
 }
 
-#message {
-  background-color: lightgrey;
-  max-width: 200px;
-  padding: 5px;
+#messages {
+  background-color: lightgreen;
+  max-width: 500px;
+  padding: 10px;
+}
+
+#mustache-message {
+  padding: 13px;
+  border: solid 1px white;
 }
