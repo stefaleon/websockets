@@ -14,7 +14,10 @@ const locationMessageTemplate = document.querySelector(
 
 socket.on('serverSentMessage', msg => {
   console.log(msg);
-  const mustacheHtml = Mustache.render(messageTemplate, { message: msg });
+  const mustacheHtml = Mustache.render(messageTemplate, {
+    text: msg.text,
+    createdAt: moment(msg.createdAt).format('HH:mm:ss')
+  });
   messagesDiv.insertAdjacentHTML('afterbegin', mustacheHtml);
 });
 

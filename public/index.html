@@ -18,9 +18,15 @@
       <div id="user-connections"></div>
     </div>
     <div id="messages"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
     <script id="message-template" type="text/html">
       <div id="mustache-message">
-        {{message}}
+        <p id="time">{{createdAt}}</p>
+        <p>{{text}}</p>
       </div>
     </script>
     <script id="location-message-template" type="text/html">
@@ -28,8 +34,7 @@
         I am <a href="{{url}}" target="_blank" >here</a>!
       </div>
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+
     <script src="js/chat.js"></script>
   </body>
 </html>

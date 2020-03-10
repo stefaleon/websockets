@@ -3,6 +3,8 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 
+const { createMessageObject } = require('./utils');
+
 const HTTP_PORT = process.env.HTTP_PORT || 3000;
 
 const app = express();
@@ -14,7 +16,10 @@ app.use(express.static(path.join(__dirname, '../public')));
 io.on('connection', socket => {
   console.log('new websocket connection');
 
-  socket.emit('serverSentMessage', 'Welcome to the chat app');
+  socket.emit(
+    'serverSentMessage',
+    createMessageObject('Welcome to the chat app')
+  );
   socket.broadcast.emit('userConnection', 'A new user has joined');
 
   socket.on('clientSentMessage', (msg, ackCallback) => {
@@ -24,7 +29,7 @@ io.on('connection', socket => {
     if (msg.trim() === 'kkk') {
       return ackCallback('Cannot say "kkk"');
     }
-    io.emit('serverSentMessage', msg);
+    io.emit('serverSentMessage', createMessageObject(msg));
     ackCallback();
   });
 
