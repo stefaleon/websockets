@@ -21,9 +21,12 @@ socket.on('serverSentMessage', msg => {
   messagesDiv.insertAdjacentHTML('afterbegin', mustacheHtml);
 });
 
-socket.on('serverSentLocationMessage', url => {
-  console.log(url);
-  const mustacheHtml = Mustache.render(locationMessageTemplate, { url });
+socket.on('serverSentLocationMessage', msg => {
+  console.log(msg);
+  const mustacheHtml = Mustache.render(locationMessageTemplate, {
+    url: msg.text,
+    createdAt: moment(msg.createdAt).format('HH:mm:ss')
+  });
   messagesDiv.insertAdjacentHTML('afterbegin', mustacheHtml);
 });
 
