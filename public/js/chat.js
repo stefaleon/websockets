@@ -6,6 +6,7 @@ const messageFormButton = messageForm.querySelector('button');
 const sendLocationButton = document.querySelector('#send-location');
 const messagesDiv = document.querySelector('#messages');
 const userConnectionMessagesDiv = document.querySelector('#user-connections');
+const userNameSpan = document.querySelector('#user-name');
 
 const messageTemplate = document.querySelector('#message-template').innerHTML;
 const locationMessageTemplate = document.querySelector(
@@ -15,6 +16,8 @@ const locationMessageTemplate = document.querySelector(
 const queryString = location.search;
 const queryData = queryString.split('?');
 const userName = queryData[1].split('=')[1];
+
+userNameSpan.innerHTML = userName;
 
 socket.on('serverSentMessage', msg => {
   console.log(msg);
