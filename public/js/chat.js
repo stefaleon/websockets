@@ -12,8 +12,13 @@ const locationMessageTemplate = document.querySelector(
   '#location-message-template'
 ).innerHTML;
 
+const queryString = location.search;
+const queryData = queryString.split('?');
+const userName = queryData[1].split('=')[1];
+
 socket.on('serverSentMessage', msg => {
   console.log(msg);
+  console.log('user:', userName);
   const mustacheHtml = Mustache.render(messageTemplate, {
     text: msg.text,
     createdAt: moment(msg.createdAt).format('HH:mm:ss')
