@@ -21,7 +21,6 @@ userNameSpan.innerHTML = userName;
 
 socket.on('serverSentMessage', msg => {
   console.log(msg);
-  console.log('user:', userName);
   const mustacheHtml = Mustache.render(messageTemplate, {
     text: msg.text,
     createdAt: moment(msg.createdAt).format('HH:mm:ss')
@@ -92,3 +91,5 @@ sendLocationButton.addEventListener('click', () => {
     );
   });
 });
+
+socket.emit('userJoined', userName);

@@ -20,7 +20,12 @@ io.on('connection', socket => {
     'serverSentMessage',
     createMessageObject('Welcome to the chat app')
   );
-  socket.broadcast.emit('userConnection', 'A new user has joined');
+  //socket.broadcast.emit('userConnection', 'A new user has joined');
+
+  socket.on('userJoined', userName => {
+    console.log('user joined', userName);
+    socket.broadcast.emit('userConnection', `${userName} has joined`);
+  });
 
   socket.on('clientSentMessage', (msg, ackCallback) => {
     if (msg.trim().length < 1) {
