@@ -22,6 +22,7 @@ userNameSpan.innerHTML = userName;
 socket.on('serverSentMessage', msg => {
   console.log(msg);
   const mustacheHtml = Mustache.render(messageTemplate, {
+    user: msg.user,
     text: msg.text,
     createdAt: moment(msg.createdAt).format('HH:mm:ss')
   });
@@ -31,6 +32,7 @@ socket.on('serverSentMessage', msg => {
 socket.on('serverSentLocationMessage', msg => {
   console.log(msg);
   const mustacheHtml = Mustache.render(locationMessageTemplate, {
+    user: msg.user,
     url: msg.text,
     createdAt: moment(msg.createdAt).format('HH:mm:ss')
   });
@@ -51,9 +53,9 @@ messageForm.addEventListener('submit', e => {
   // disable the form on submit
   messageFormButton.setAttribute('disabled', 'disabled');
 
-  const clientMessage = document.querySelector('input').value;
+  const messageText = document.querySelector('input').value;
 
-  socket.emit('clientSentMessage', clientMessage, errorMessage => {
+  socket.emit('clientSentMessage', { userName, messageText }, errorMessage => {
     // reenable the form on emit
     messageFormButton.removeAttribute('disabled');
 
@@ -80,6 +82,7 @@ sendLocationButton.addEventListener('click', () => {
     socket.emit(
       'locationSent',
       {
+        userName,
         lat: position.coords.latitude,
         long: position.coords.longitude
       },

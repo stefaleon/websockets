@@ -18,7 +18,7 @@ io.on('connection', socket => {
 
   socket.emit(
     'serverSentMessage',
-    createMessageObject('Welcome to the chat app')
+    createMessageObject({ text: 'Welcome to the chat app' })
   );
   //socket.broadcast.emit('userConnection', 'A new user has joined');
 
@@ -28,13 +28,17 @@ io.on('connection', socket => {
   });
 
   socket.on('clientSentMessage', (msg, ackCallback) => {
-    if (msg.trim().length < 1) {
+    console.log('testttt', msg);
+    if (msg.messageText.trim().length < 1) {
       return ackCallback('Cannot emit empty messages');
     }
-    if (msg.trim() === 'kkk') {
+    if (msg.messageText.trim() === 'kkk') {
       return ackCallback('Cannot say "kkk"');
     }
-    io.emit('serverSentMessage', createMessageObject(msg));
+    io.emit(
+      'serverSentMessage',
+      createMessageObject({ user: msg.userName, text: msg.messageText })
+    );
     ackCallback();
   });
 
@@ -45,7 +49,10 @@ io.on('connection', socket => {
   socket.on('locationSent', (obj, callback) => {
     io.emit(
       'serverSentLocationMessage',
-      createMessageObject(`https://google.com/maps?q=${obj.lat},${obj.long}`)
+      createMessageObject({
+        user: obj.userName,
+        text: `https://google.com/maps?q=${obj.lat},${obj.long}`
+      })
     );
     callback();
   });
